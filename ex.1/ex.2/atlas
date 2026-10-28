@@ -1,0 +1,22 @@
+use cloudDB
+
+db.createCollection("students")
+
+db.students.insertMany([
+  { name: "Arun", course: "BCA", marks: 85 },
+  { name: "Priya", course: "BCA", marks: 90 },
+  { name: "Rahul", course: "BSc", marks: 78 }
+])
+
+db.students.find()
+
+db.students.find({ course: "BCA" })
+
+db.students.updateOne(
+  { name: "Arun" },
+  { $set: { marks: 88 } }
+)
+
+db.students.deleteOne({ name: "Rahul" })
+
+db.students.find()
