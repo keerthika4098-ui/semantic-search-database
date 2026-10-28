@@ -1,0 +1,55 @@
+use knowledgeDB
+
+db.documents.insertMany([
+  {
+    title: "Leave Policy",
+    category: "HR",
+    content: "Employees can apply for annual leave.",
+    keywords: ["leave", "employees", "HR"]
+  },
+  {
+    title: "Security Policy",
+    category: "IT",
+    content: "Employees must protect confidential data.",
+    keywords: ["security", "data", "privacy"]
+  },
+  {
+    title: "Travel Policy",
+    category: "HR",
+    content: "Travel expenses must be approved by a manager.",
+    keywords: ["travel", "expenses", "approval"]
+  }
+])
+
+// Display all documents
+db.documents.find()
+
+// Search by category
+db.documents.find({ category: "HR" })
+
+// Search for a word in the title and content
+db.documents.createIndex({
+  title: "text",
+  content: "text"
+})
+
+db.documents.find({
+  $text: { $search: "security data" }
+})
+
+// Find documents using keywords
+db.documents.find({
+  keywords: "leave"
+})
+
+// Update a document
+db.documents.updateOne(
+  { title: "Leave Policy" },
+  { $set: { content: "Employees must obtain approval for leave." } }
+)
+
+// Delete a document
+db.documents.deleteOne({ title: "Travel Policy" })
+
+// Display remaining documents
+db.documents.find()
