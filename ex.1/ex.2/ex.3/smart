@@ -1,0 +1,33 @@
+use inventoryDB
+
+db.inventory.insertMany([
+  { product: "Laptop", category: "Electronics", quantity: 20, price: 50000 },
+  { product: "Mouse", category: "Electronics", quantity: 100, price: 500 },
+  { product: "Chair", category: "Furniture", quantity: 15, price: 3000 },
+  { product: "Keyboard", category: "Electronics", quantity: 8, price: 1200 },
+  { product: "Table", category: "Furniture", quantity: 5, price: 7000 }
+])
+
+// Display all inventory
+db.inventory.find()
+
+// Find products with low stock
+db.inventory.find({ quantity: { $lt: 10 } })
+
+// Update stock quantity
+db.inventory.updateOne(
+  { product: "Laptop" },
+  { $inc: { quantity: 10 } }
+)
+
+// Create an index on product name
+db.inventory.createIndex({ product: 1 })
+
+// Create a compound index
+db.inventory.createIndex({ category: 1, quantity: 1 })
+
+// Check available indexes
+db.inventory.getIndexes()
+
+// Analyze query execution
+db.inventory.find({ product: "Laptop" }).explain("executionStats"
