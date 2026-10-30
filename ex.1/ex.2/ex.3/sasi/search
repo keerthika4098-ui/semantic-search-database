@@ -1,0 +1,21 @@
+use legalDB
+
+db.legalDocuments.insertMany([
+  {
+    title: "Employment Contract",
+    content: "This document explains employee rights, duties, and employment terms.",
+    category: "Employment"
+  },
+  {
+    title: "Property Agreement",
+    content: "This document describes property ownership and transfer conditions.",
+    category: "Property"
+  },
+  {
+    title: "Privacy Policy",
+    content: "This document explains personal data protection and privacy rights.",
+    category: "Privacy"
+  }
+])
+
+db.legalDocuments.find()
